@@ -1,4 +1,4 @@
-# youtube-caption-srt
+# Youtube Caption Json Downloader
 ![alt text](/you2json.png "website screenshot")
 
 ## Goal
