@@ -2,13 +2,13 @@
 ![alt text](/you2json.png "website screenshot")
 
 ## Goal
-download youtube caption by videoId or video url
+download youtube caption by video url or videoId
 
 ## Requirement
 - PHP
 
 ## Demo
-[Demo.](http://www.you2json.nctu.me)
+[Live Demo](http://www.you2json.nctu.me)
 
 ## ToDo
 multi language capptions support
