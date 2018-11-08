@@ -12,5 +12,6 @@ simplely input a video url or videoId
 [Live Demo](http://www.you2json.nctu.me)
 
 ## ToDo
-1.multi language support
-2.show video caption info
+1. alert if video has no caption
+2. multi language caption support
+3. show video's caption info (languages, number etc)
