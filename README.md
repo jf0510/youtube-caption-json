@@ -1,8 +1,9 @@
-# Youtube Caption Json Downloader
+# Youtube Caption Downloader
 ![alt text](/you2json.png "website screenshot")
 
 ## Goal
-download youtube caption by video url or videoId
+download youtube caption into json format
+simplely input a video url or videoId
 
 ## Requirement
 - PHP
@@ -11,4 +12,5 @@ download youtube caption by video url or videoId
 [Live Demo](http://www.you2json.nctu.me)
 
 ## ToDo
-multi language capptions support
+1.multi language support
+2.show video caption info
