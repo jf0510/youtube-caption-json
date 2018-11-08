@@ -1,5 +1,7 @@
 <?php
-$video_id = $_GET['video_id'];
+header("Content-Type:application/json; charset=utf-8");
+$POST = json_decode(file_get_contents("php://input"));
+$video_id = $POST->v;
 
 function youtube_Timetext($id) {
     $url = "http://video.google.com/timedtext?lang=en&v=" . $id;
@@ -30,7 +32,7 @@ function youtube_Timetext($id) {
 
 function youtube_Title($id) {
 	// $id = 'YOUTUBE_ID';
-    // returns a single line of JSON that contains the video title. Not a giant request.
+    // returns a single line of JSON that contains the video title.
     $url  =  "https://www.googleapis.com/youtube/v3/videos?id=".$id."&key=AIzaSyC8O_VAWWHLHbStWbX-2wNzr8FrRTkI16w&fields=items(id,snippet(title),statistics)&part=snippet,statistics"; 
     $ch  = curl_init();  
     curl_setopt( $ch , CURLOPT_URL, $url );  
@@ -38,8 +40,6 @@ function youtube_Title($id) {
     curl_setopt( $ch , CURLOPT_SSL_VERIFYHOST, false);  
     curl_setopt( $ch , CURLOPT_RETURNTRANSFER, 1);  
     $videoTitle  = curl_exec( $ch );  
-	// $videoTitle = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$id."&key=AIzaSyC8O_VAWWHLHbStWbX-2wNzr8FrRTkI16w&fields=items(id,snippet(title),statistics)&part=snippet,statistics");
-	// despite @ suppress, it will be false if it fails
 	if ($videoTitle) {
 		$json = json_decode($videoTitle, true);
 		return $json['items'][0]['snippet']['title'];
@@ -51,12 +51,18 @@ function youtube_Title($id) {
 $title = youtube_Title($video_id);
 $timetext = youtube_Timetext($video_id);
 
-$fp = fopen('json/'.$video_id.'.json', 'w');
+$filename = 'json/'.$video_id.'.json';
+$fp = fopen($filename, 'w');
 fwrite($fp, json_encode($timetext, JSON_PRETTY_PRINT));
 fclose($fp);
 
-var_dump($title);
-var_dump($timetext);
+$status = "Success";
+$arr = array('video_id'=> $video_id, 'title'=> $title, 'file' => $video_id.'.json', 'json'=>json_encode($timetext, JSON_PRETTY_PRINT), 'status'=>$status);
+echo json_encode($arr);
+
+// var_dump($title);
+// var_dump($timetext);
+// var_dump(json_encode($timetext, JSON_PRETTY_PRINT));
 
 /*$xmlstring = <<<XML
 <?xml version="1.0" encoding="ISO-8859-1"?>
